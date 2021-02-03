@@ -1,9 +1,8 @@
-// Singly Linked List
-class ListNode {
-  constructor(data){
+class Node {
+  constructor(data, next=null){
     this.data  = data
     this.next = null
-  }
+  } 
 }
 
 class LinkedList {
@@ -12,12 +11,59 @@ class LinkedList {
   }
 }
 
+LinkedList.prototype.insertBeginning = function(data) {
+ 
+  let newNode = new Node(data)
+  
+  newNode.next = this.head
+  this.head = newNode
+  
+  return this.head
+}
 
-let node1 = new ListNode(2)
-let node2 = new ListNode(5)
-node1.next = node2
 
-let list = new LinkedList(node1)
+LinkedList.prototype.insertAtEnd = function(data) {
+  
+  let newNode = new Node(data)
+  
+  // Are we at the beginning of the list?
+  if(!this.head) {
+    this.head = newNode
+    return this.head 
+  }
+  
+  //Otherwise, traverse the list until the tail or the node where the next pointer is null:
+  let tail = this.head
+  while(tail.next!==null){
+    tail = tail.next
+  }
+  tail.next = newNode;
+  return this.head;
+}
 
-// console.log(list.head)     // ListNode { data: 2, next: ListNode { data: 5, next: null } }
-// console.log(node1.next)    // ListNode { data: 5, next: null }
+let list = new LinkedList()
+
+console.log(list)
+
+list.insertBeginning("Pineapple")
+list.insertBeginning("Banana")
+list.insertAtEnd("Kiwi")
+
+console.log(list)
+console.log(list.head)
+
+
+// Output:
+LinkedList { head: null }
+
+LinkedList {
+  head: Node {
+    data: 'Banana',
+    next: Node { data: 'Pineapple', next: [Node] }
+  }
+}
+
+Node {
+  data: 'Banana',
+  next: Node { data: 'Pineapple', next: Node { data: 'Kiwi', next: null } }
+}
