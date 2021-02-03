@@ -41,21 +41,30 @@ LinkedList.prototype.insertAtEnd = function(data) {
   return this.head;
 }
 
+LinkedList.prototype.Find = function(value) {
+  let current = this.head
+  
+  while(current !== null) {
+    if(current.data === value) {
+      return current
+    }
+    current = current.next
+  }
+  return null;
+}
+
 let list = new LinkedList()
 
-console.log(list)
 
 list.insertBeginning("Pineapple")
 list.insertBeginning("Banana")
 list.insertAtEnd("Kiwi")
 
-console.log(list)
-console.log(list.head)
-
-
-// Output:
+// Outputs:
+// console.log(list)
 LinkedList { head: null }
 
+// console.log(list)
 LinkedList {
   head: Node {
     data: 'Banana',
@@ -63,7 +72,11 @@ LinkedList {
   }
 }
 
+// console.log(list.head)
 Node {
   data: 'Banana',
   next: Node { data: 'Pineapple', next: Node { data: 'Kiwi', next: null } }
 }
+
+// console.log(list.Find("Pineapple"))
+Node { data: 'Pineapple', next: null }
